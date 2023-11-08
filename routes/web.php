@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    // return view('welcome');
+    return view('login');
+})->name('login');
+
+
+Route::get('/dashboard', function () {
+    // return view('welcome');
+    return view('dashboard');
+})->middleware('jwt.auth');
+// });
+// Route::middleware(['web', 'auth'])->group(function () {

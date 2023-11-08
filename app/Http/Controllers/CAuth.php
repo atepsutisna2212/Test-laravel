@@ -49,11 +49,12 @@ class CAuth extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if ($token = auth()->attempt($credentials)) {
+            // return $this->respondWithToken($token);
+            $token = $this->respondWithToken($token);
+            return redirect('/dashboard');
         }
-
-        return $this->respondWithToken($token);
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     /**
